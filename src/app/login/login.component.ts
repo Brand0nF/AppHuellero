@@ -1,33 +1,40 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from './auth.service'; // Asegúrate de tener la ruta correcta
+import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms'; // Importa ReactiveFormsModule
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
+  standalone: true,
+  imports: [ReactiveFormsModule] // Agrega ReactiveFormsModule aquí
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  errorMessage: string | null = null;
+  errorMessage: string = '';
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required]]
     });
   }
 
   onSubmit(): void {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe({
-        next: (response) => {
-          localStorage.setItem('token', response.token); // Guarda el token
-          this.router.navigate(['/']); // Redirige al dashboard u otra página
+        next: () => {
+          this.router.navigate(['/dashboard']); // Cambia '/dashboard' por la ruta deseada después de iniciar sesión
         },
-        error: (err) => {
-          this.errorMessage = 'Credenciales inválidas'; // Maneja el error
-        },
+        error: () => {
+          this.errorMessage = 'Credenciales inválidas';
+        }
       });
     }
   }

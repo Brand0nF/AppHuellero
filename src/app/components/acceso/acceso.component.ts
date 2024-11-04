@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common'; // Importa CommonModule
 import { FormsModule } from '@angular/forms'; // Importa FormsModule
 
 interface Acceso {
@@ -14,7 +15,7 @@ interface Acceso {
   templateUrl: './acceso.component.html',
   styleUrls: ['./acceso.component.css'],
   standalone: true,
-  imports: [FormsModule] // Agrega FormsModule aquí
+  imports: [CommonModule, FormsModule] // Agrega CommonModule y FormsModule aquí
 })
 export class AccesoComponent {
   accesos: Acceso[] = []; // Define el tipo de datos
