@@ -1,0 +1,13 @@
+<div>
+    <h2>Gestión de Horarios</h2>
+    <form #horarioForm="ngForm" (ngSubmit)="agregarHorarioForm(horarioForm)">
+      <input type="text" name="usuario" ngModel placeholder="ID Usuario" required />
+      <input type="time" name="entrada" ngModel required />
+      <input type="time" name="salida" ngModel required />
+      <button type="submit">Agregar Horario</button>
+    </form>
+    <ul>
+      <li *ngFor="let horario of horarios">{{ horario.usuario }} - {{ horario.entrada }} a {{ horario.salida }}</li>
+    </ul>
+  </div>
+  

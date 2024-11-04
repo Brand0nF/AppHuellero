@@ -1,0 +1,16 @@
+<div>
+    <h2>Registro de Puertas</h2>
+    <form #registroForm="ngForm" (ngSubmit)="agregarRegistroForm(registroForm)">
+      <input type="text" name="puerta" ngModel placeholder="ID Puerta" required />
+      <select name="accion" ngModel required>
+        <option value="Apertura">Apertura</option>
+        <option value="Cierre">Cierre</option>
+      </select>
+      <input type="text" name="hora" ngModel placeholder="Hora (HH:mm:ss)" required />
+      <button type="submit">Agregar Registro</button>
+    </form>
+    <ul>
+      <li *ngFor="let registro of registros">{{ registro.puerta }} - {{ registro.accion }} a {{ registro.hora }}</li>
+    </ul>
+  </div>
+  

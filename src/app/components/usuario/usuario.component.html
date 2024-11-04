@@ -1,0 +1,15 @@
+<div>
+    <h2>Gestión de Usuarios</h2>
+    <form #usuarioForm="ngForm" (ngSubmit)="agregarUsuarioForm(usuarioForm)">
+      <input type="text" name="nombre" ngModel placeholder="Nombre" required />
+      <input type="text" name="rut" ngModel placeholder="RUT" required />
+      <input type="date" name="fechaNacimiento" ngModel required />
+      <input type="text" name="huellaDigital" ngModel placeholder="Huella Digital" required />
+      <input type="text" name="clavePersonalizada" ngModel placeholder="Clave Personalizada" required />
+      <button type="submit">Agregar Usuario</button>
+    </form>
+    <ul>
+      <li *ngFor="let usuario of usuarios">{{ usuario.nombre }} - {{ usuario.rut }}</li>
+    </ul>
+  </div>
+  

@@ -1,0 +1,15 @@
+<div>
+    <h2>Gestión de Puertas</h2>
+    <form #puertaForm="ngForm" (ngSubmit)="agregarPuertaForm(puertaForm)">
+      <input type="text" name="ubicacion" ngModel placeholder="Ubicación" required />
+      <select name="estado" ngModel required>
+        <option value="abierta">Abierta</option>
+        <option value="cerrada">Cerrada</option>
+      </select>
+      <button type="submit">Agregar Puerta</button>
+    </form>
+    <ul>
+      <li *ngFor="let puerta of puertas">{{ puerta.ubicacion }} - {{ puerta.estado }}</li>
+    </ul>
+  </div>
+  

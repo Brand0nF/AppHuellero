@@ -1,0 +1,21 @@
+<div>
+    <h2>Gestión de Accesos</h2>
+    <form #accesoForm="ngForm" (ngSubmit)="agregarAccesoForm(accesoForm)">
+      <input type="text" name="usuario" ngModel placeholder="ID Usuario" required />
+      <input type="text" name="puerta" ngModel placeholder="ID Puerta" required />
+      <select name="accesoPermitido" ngModel required>
+        <option value="true">Permitido</option>
+        <option value="false">No Permitido</option>
+      </select>
+      <select name="tipoAcceso" ngModel required>
+        <option value="entrada">Entrada</option>
+        <option value="salida">Salida</option>
+      </select>
+      <input type="datetime-local" name="horaAcceso" ngModel placeholder="Hora de Acceso" required />
+      <button type="submit">Agregar Acceso</button>
+    </form>
+    <ul>
+      <li *ngFor="let acceso of accesos">{{ acceso.usuario }} - {{ acceso.puerta }}</li>
+    </ul>
+  </div>
+  

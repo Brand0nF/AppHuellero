@@ -1,0 +1,13 @@
+h2 {
+    color: #2196F3;
+  }
+  
+  form {
+    margin-bottom: 20px;
+  }
+  
+  input, select {
+    display: block;
+    margin: 10px 0;
+  }
+  
