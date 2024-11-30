@@ -1,28 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';  // Importar FormsModule
-import { PuertaService } from './../../services/puerta.service';  // Importa el servicio que interactúa con la API
+import { FormsModule } from '@angular/forms'; // Importar FormsModule
+import { PuertaService } from './../../services/puerta.service'; // Importa el servicio que interactúa con la API
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';  // Para realizar las solicitudes HTTP
+import { HttpClient } from '@angular/common/http'; // Para realizar las solicitudes HTTP
 
 @Component({
   selector: 'app-ubicaciones',
-  standalone: true,  // Declarar el componente como standalone
-  imports: [FormsModule, CommonModule],  // Importar FormsModule para el uso de ngModel
+  standalone: true, // Declarar el componente como standalone
+  imports: [FormsModule, CommonModule], // Importar FormsModule para el uso de ngModel
   templateUrl: './ubicaciones.component.html',
   styleUrls: ['./ubicaciones.component.css']
 })
 export class UbicacionesComponent implements OnInit {
-  vistaActual: string = 'listar';  // Controla la vista (listar, crear, detalles)
-  puertas: any[] = [];  // Lista de puertas
-  nuevaPuerta = { ubicacion: '', estado: 'abierta' };  // Datos del formulario para nueva puerta
-  puertaActual: any = null;  // Puerta seleccionada para editar
-  accion: string = 'Apertura';  // Acción por defecto
-  hora: string = new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' });  // Hora actual por defecto
+  vistaActual: string = 'listar'; // Controla la vista (listar, crear, detalles)
+  puertas: any[] = []; // Lista de puertas
+  nuevaPuerta = { ubicacion: '', estado: 'abierta' }; // Datos del formulario para nueva puerta
+  puertaActual: any = null; // Puerta seleccionada para editar
+  accion: string = 'Apertura'; // Acción por defecto
+  hora: string = new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' }); // Hora actual por defecto
 
   constructor(private puertaService: PuertaService, private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.cargarPuertas();  // Cargar las puertas registradas al iniciar el componente
+    this.cargarPuertas(); // Cargar las puertas registradas al iniciar el componente
   }
 
   cargarPuertas(): void {
@@ -34,6 +34,10 @@ export class UbicacionesComponent implements OnInit {
   seleccionarPuerta(puerta: any): void {
     this.puertaActual = puerta;
     this.vistaActual = 'detalles';
+  }
+
+  obtenerColorIcono(estado: string): string {
+    return estado === 'abierta' ? 'green' : 'red';
   }
 
   registrarPuerta(): void {
@@ -60,14 +64,14 @@ export class UbicacionesComponent implements OnInit {
   actualizarPuerta(): void {
     this.puertaService.actualizarPuerta(this.puertaActual._id, this.nuevaPuerta).subscribe(() => {
       this.vistaActual = 'listar';
-      this.cargarPuertas();  // Recargar la lista de puertas después de la actualización
+      this.cargarPuertas(); // Recargar la lista de puertas después de la actualización
     });
   }
 
   eliminarPuerta(): void {
     this.puertaService.eliminarPuerta(this.puertaActual._id).subscribe(() => {
       this.vistaActual = 'listar';
-      this.cargarPuertas();  // Recargar la lista de puertas después de la eliminación
+      this.cargarPuertas(); // Recargar la lista de puertas después de la eliminación
     });
   }
 

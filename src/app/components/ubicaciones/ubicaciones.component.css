@@ -128,4 +128,9 @@
   select:focus {
     transform: scale(1.05);
   }
+  .estado-icono {
+    margin-left: 10px;
+    font-size: 1.2rem;
+    vertical-align: middle;
+  }
   
