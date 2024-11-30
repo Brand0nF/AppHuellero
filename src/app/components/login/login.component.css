@@ -1,0 +1,98 @@
+/* login.component.css */
+
+/* Establece un fondo y elimina márgenes y padding por defecto */
+body {
+  font-family: 'Arial', sans-serif;
+  background: #f4f7fc;
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Hace que el body ocupe toda la altura de la ventana */
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+}
+
+/* Contenedor principal del formulario de login */
+.login-container {
+  justify-self: center;
+  margin-top: 25vh;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px; /* El tamaño máximo del formulario */
+  box-sizing: border-box;
+  text-align: center; /* Centra el contenido dentro del formulario */
+}
+
+/* Título del formulario */
+h2 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Campos de entrada */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+/* Cambio en el borde de los campos cuando están enfocados */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #0056b3;
+  outline: none;
+}
+
+/* Estilos para el botón de inicio de sesión */
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Efecto hover sobre el botón */
+button:hover {
+  background-color: #004080;
+}
+
+/* Estilos para el mensaje de error */
+.error-message {
+  color: #f44336;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+/* Enlace al formulario de registro */
+p {
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+}
+
+p a {
+  color: #0056b3;
+  text-decoration: none;
+}
+
+p a:hover {
+  text-decoration: underline;
+}

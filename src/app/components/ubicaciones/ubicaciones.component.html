@@ -1,0 +1,82 @@
+<div class="container">
+    <!-- Navegación entre vistas (listar, crear, detalles) -->
+    <div *ngIf="vistaActual === 'listar'">
+      <h2>Listado de Ubicaciones</h2>
+      <button (click)="vistaActual = 'crear'; limpiarFormulario()">Crear Nueva Puerta</button>
+  
+      <ul>
+        <li *ngFor="let puerta of puertas" (click)="seleccionarPuerta(puerta)">
+          {{ puerta.ubicacion }} - {{ puerta.estado }}
+        </li>
+      </ul>
+    </div>
+  
+    <!-- Vista para crear o editar una puerta -->
+    <div *ngIf="vistaActual === 'crear'">
+      <h2>{{ puertaActual ? 'Editar Puerta' : 'Crear Nueva Puerta' }}</h2>
+      <form (ngSubmit)="puertaActual ? actualizarPuerta() : registrarPuerta()">
+        <div>
+          <label for="ubicacion">Ubicación</label>
+          <input
+            type="text"
+            id="ubicacion"
+            [(ngModel)]="nuevaPuerta.ubicacion"
+            name="ubicacion"
+            required
+          />
+        </div>
+        <div>
+          <label for="estado">Estado</label>
+          <select
+            id="estado"
+            [(ngModel)]="nuevaPuerta.estado"
+            name="estado"
+            required
+          >
+            <option value="abierta">Abierta</option>
+            <option value="cerrada">Cerrada</option>
+          </select>
+        </div>
+  
+        <!-- Campo para seleccionar la acción -->
+        <div>
+          <label for="accion">Acción</label>
+          <select
+            id="accion"
+            [(ngModel)]="accion"
+            name="accion"
+            required
+          >
+            <option value="Apertura">Apertura</option>
+            <option value="Cierre">Cierre</option>
+          </select>
+        </div>
+  
+        <!-- Campo para hora -->
+        <div>
+          <label for="hora">Hora</label>
+          <input
+            type="text"
+            id="hora"
+            [(ngModel)]="hora"
+            name="hora"
+            required
+          />
+        </div>
+  
+        <button type="submit">{{ puertaActual ? 'Actualizar Puerta' : 'Crear Puerta' }}</button>
+        <button type="button" (click)="vistaActual = 'listar'; limpiarFormulario()">Cancelar</button>
+      </form>
+    </div>
+  
+    <!-- Vista para ver detalles de una puerta -->
+    <div *ngIf="vistaActual === 'detalles'">
+      <h2>Detalles de Puerta: {{ puertaActual?.ubicacion }}</h2>
+      <p><strong>Estado:</strong> {{ puertaActual?.estado }}</p>
+  
+      <button (click)="editarPuerta()">Editar</button>
+      <button (click)="eliminarPuerta()">Eliminar</button>
+      <button (click)="vistaActual = 'listar'">Volver</button>
+    </div>
+  </div>
+  

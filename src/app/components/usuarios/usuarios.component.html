@@ -1,0 +1,84 @@
+<div *ngIf="vistaActual === 'listar'" class="usuarios-container">
+  <h2>Usuarios Registrados</h2>
+
+  <div *ngFor="let usuario of usuarios" class="usuario-item" (click)="seleccionarUsuario(usuario)">
+    <h3>{{ usuario.nombre }}</h3>
+    <p><strong>RUT:</strong> {{ usuario.rut }}</p>
+    <p><strong>Fecha de Nacimiento:</strong> {{ usuario.fechaNacimiento }}</p>
+  </div>
+
+  <button class="btn-accion" (click)="vistaActual = 'crear'">Registrar Usuario</button>
+</div>
+
+<div *ngIf="vistaActual === 'crear'" class="usuarios-container">
+  <h2>{{ usuarioActual ? 'Actualizar Usuario' : 'Registrar Nuevo Usuario' }}</h2>
+  <form (ngSubmit)="usuarioActual ? actualizarUsuario() : registrarUsuario()" class="formulario-usuario">
+    <label class="form-label">Nombre:</label>
+    <input
+      type="text"
+      [(ngModel)]="nuevoUsuario.nombre"
+      name="nombre"
+      required
+      class="form-input"
+    />
+
+    <label class="form-label">RUT:</label>
+    <input
+      type="text"
+      [(ngModel)]="nuevoUsuario.rut"
+      name="rut"
+      required
+      class="form-input"
+    />
+
+    <label class="form-label">Fecha de Nacimiento:</label>
+    <input
+      type="date"
+      [(ngModel)]="nuevoUsuario.fechaNacimiento"
+      name="fechaNacimiento"
+      required
+      class="form-input"
+    />
+
+    <label class="form-label">Huella Digital:</label>
+    <input
+      type="text"
+      [(ngModel)]="nuevoUsuario.huellaDigital"
+      name="huellaDigital"
+      required
+      class="form-input"
+    />
+
+    <label class="form-label">Clave Personalizada:</label>
+    <input
+      type="password"
+      [(ngModel)]="nuevoUsuario.clavePersonalizada"
+      name="clavePersonalizada"
+      required
+      class="form-input"
+    />
+
+    <div class="form-acciones">
+      <button type="submit" class="btn-accion">
+        {{ usuarioActual ? 'Actualizar' : 'Guardar' }}
+      </button>
+      <button type="button" class="btn-accion btn-cancelar" (click)="vistaActual = 'listar'; limpiarFormulario()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="vistaActual === 'detalles' && usuarioActual" class="usuarios-container">
+  <h2>Detalles de {{ usuarioActual.nombre }}</h2>
+  <p><strong>RUT:</strong> {{ usuarioActual.rut }}</p>
+  <p><strong>Fecha de Nacimiento:</strong> {{ usuarioActual.fechaNacimiento }}</p>
+  <p><strong>Huella Digital:</strong> {{ usuarioActual.huellaDigital }}</p>
+  <p><strong>Clave:</strong> {{ usuarioActual.clavePersonalizada }}</p>
+
+  <div class="usuario-acciones">
+    <button class="btn-accion" (click)="editarUsuario()">Editar</button>
+    <button class="btn-accion btn-eliminar" (click)="eliminarUsuario()">Eliminar</button>
+    <button class="btn-accion btn-volver" (click)="vistaActual = 'listar'">Volver</button>
+  </div>
+</div>

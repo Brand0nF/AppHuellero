@@ -1,0 +1,119 @@
+/* Contenedor principal de usuarios */
+.usuarios-container {
+  justify-self: center;
+  margin-top: 2vh;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px; /* Tamaño máximo del contenedor */
+  box-sizing: border-box;
+  text-align: center; /* Centra el contenido */
+}
+
+/* Título del componente */
+h2 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Contenedor para cada usuario */
+.usuario-item {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.usuario-item:hover {
+  background-color: #f1f1f1;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Información del usuario */
+.usuario-item h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.usuario-item p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Formulario */
+.formulario-usuario {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-label {
+  font-weight: bold;
+  text-align: left;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.form-input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.form-acciones {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Botones generales */
+.btn-accion {
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: #fff;
+}
+
+.btn-accion {
+  background-color: #007bff;
+}
+
+.btn-accion:hover {
+  background-color: #0056b3;
+}
+
+.btn-cancelar {
+  background-color: #6c757d;
+}
+
+.btn-cancelar:hover {
+  background-color: #5a6268;
+}
+
+.btn-eliminar {
+  background-color: #f44336;
+}
+
+.btn-eliminar:hover {
+  background-color: #d32f2f;
+}
+
+.btn-volver {
+  background-color: #28a745;
+}
+
+.btn-volver:hover {
+  background-color: #218838;
+}
