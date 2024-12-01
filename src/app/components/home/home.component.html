@@ -1,21 +1,48 @@
-<div class="home">
-  <h1>Administración de Huellero</h1>
-  <div class="home-links">
-    <a routerLink="/accesos" class="link-card">
-      <h2>Accesos</h2>
-      <p>Ver y administrar registros de acceso</p>
-    </a>
-    <a routerLink="/usuarios" class="link-card">
-      <h2>Usuarios</h2>
-      <p>Administrar usuarios registrados</p>
-    </a>
-    <a routerLink="/ubicaciones" class="link-card">
-      <h2>Ubicaciones</h2>
-      <p>Configurar ubicaciones de las puertas</p>
-    </a>
-    <a routerLink="/dashboard" class="link-card">
-      <h2>Dashboard</h2>
-      <p>Ver estadísticas generales</p>
-    </a>
+<div class="container mt-5">
+  <h1 class="text-center mb-4 administracion">Administración de Huellero</h1> <!-- Clase administracion añadida -->
+  <div class="row g-4">
+    <!-- Accesos -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card text-center shadow-sm h-100">
+        <div class="card-body">
+          <h2 class="card-title text-primary">Accesos</h2>
+          <p class="card-text">Ver y administrar registros de acceso</p>
+          <a routerLink="/accesos" class="btn btn-primary btn-sm mt-3">Ir a Accesos</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Usuarios -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card text-center shadow-sm h-100">
+        <div class="card-body">
+          <h2 class="card-title text-primary">Usuarios</h2>
+          <p class="card-text">Administrar usuarios registrados</p>
+          <a routerLink="/usuarios" class="btn btn-primary btn-sm mt-3">Ir a Usuarios</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ubicaciones -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card text-center shadow-sm h-100">
+        <div class="card-body">
+          <h2 class="card-title text-primary">Ubicaciones</h2>
+          <p class="card-text">Configurar ubicaciones de las puertas</p>
+          <a routerLink="/ubicaciones" class="btn btn-primary btn-sm mt-3">Ir a Ubicaciones</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card text-center shadow-sm h-100">
+        <div class="card-body">
+          <h2 class="card-title text-primary">Dashboard</h2>
+          <p class="card-text">Ver estadísticas generales</p>
+          <a routerLink="/dashboard" class="btn btn-primary btn-sm mt-3">Ir a Dashboard</a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

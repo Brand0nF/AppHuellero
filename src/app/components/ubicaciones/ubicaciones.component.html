@@ -1,86 +1,75 @@
-<div class="container">
-  <!-- Navegación entre vistas (listar, crear, detalles) -->
-  <div *ngIf="vistaActual === 'listar'">
-    <h2>Listado de Ubicaciones</h2>
-    <button (click)="vistaActual = 'crear'; limpiarFormulario()">Crear Nueva Puerta</button>
-
-    <ul>
-      <li *ngFor="let puerta of puertas" (click)="seleccionarPuerta(puerta)">
-        {{ puerta.ubicacion }} - {{ puerta.estado }}
-        <!-- Ícono al final con color dinámico -->
-        <span
-          class="estado-icono"
-          [ngStyle]="{ color: obtenerColorIcono(puerta.estado) }"
-        >
-          ●
-        </span>
-      </li>
-    </ul>
+<div class="container py-4">
+  <!-- Título y navegación entre vistas -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-primary">{{ vistaActual === 'listar' ? 'Listado de Ubicaciones' : (puertaActual ? 'Editar Puerta' : 'Crear Nueva Puerta') }}</h2>
+    <button *ngIf="vistaActual === 'listar'" class="btn btn-success" (click)="vistaActual = 'crear'; limpiarFormulario()">Crear Nueva Puerta</button>
+    <button *ngIf="vistaActual === 'crear' || vistaActual === 'detalles'" class="btn btn-secondary" (click)="vistaActual = 'listar'; limpiarFormulario()">Volver a Lista</button>
   </div>
 
-  <!-- Vista para crear o editar una puerta -->
-  <div *ngIf="vistaActual === 'crear'">
-    <h2>{{ puertaActual ? 'Editar Puerta' : 'Crear Nueva Puerta' }}</h2>
-    <form (ngSubmit)="puertaActual ? actualizarPuerta() : registrarPuerta()">
-      <div>
-        <label for="ubicacion">Ubicación</label>
-        <input
-          type="text"
-          id="ubicacion"
-          [(ngModel)]="nuevaPuerta.ubicacion"
-          name="ubicacion"
-          required
-        />
+  <!-- Vista: Listado de puertas -->
+  <div *ngIf="vistaActual === 'listar'" class="row">
+    <!-- Iterar sobre cada puerta y mostrarla como una card -->
+    <div *ngFor="let puerta of puertas" class="col-md-4 mb-4">
+      <div class="card shadow-sm" (click)="seleccionarPuerta(puerta)">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <!-- Nombre de la puerta a la izquierda -->
+            <h5 class="card-title mb-0">{{ puerta.ubicacion }}</h5>
+            
+            <!-- Estado e icono de estado a la derecha -->
+            <div class="d-flex align-items-center">
+              <span class="estado-icono" [ngStyle]="{ color: obtenerColorIcono(puerta.estado) }">●</span>
+              <p class="mb-0 ms-2">{{ puerta.estado }}</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        <label for="estado">Estado</label>
-        <select
-          id="estado"
-          [(ngModel)]="nuevaPuerta.estado"
-          name="estado"
-          required
-        >
-          <option value="abierta">Abierta</option>
-          <option value="cerrada">Cerrada</option>
-        </select>
-      </div>
-
-      <!-- Campo para seleccionar la acción -->
-      <div>
-        <label for="accion">Acción</label>
-        <select id="accion" [(ngModel)]="accion" name="accion" required>
-          <option value="Apertura">Apertura</option>
-          <option value="Cierre">Cierre</option>
-        </select>
-      </div>
-
-      <!-- Campo para hora -->
-      <div>
-        <label for="hora">Hora</label>
-        <input type="text" id="hora" [(ngModel)]="hora" name="hora" required />
-      </div>
-
-      <button type="submit">{{ puertaActual ? 'Actualizar Puerta' : 'Crear Puerta' }}</button>
-      <button type="button" (click)="vistaActual = 'listar'; limpiarFormulario()">Cancelar</button>
-    </form>
+    </div>
   </div>
 
-  <!-- Vista para ver detalles de una puerta -->
-  <div *ngIf="vistaActual === 'detalles'">
-    <h2>Detalles de Puerta: {{ puertaActual?.ubicacion }}</h2>
-    <p>
-      <strong>Estado:</strong> {{ puertaActual?.estado }}
-      <!-- Ícono al lado del estado -->
-      <span
-        class="estado-icono"
-        [ngStyle]="{ color: obtenerColorIcono(puertaActual.estado) }"
-      >
-        ●
-      </span>
-    </p>
+  <!-- Vista: Crear o editar puerta -->
+  <div *ngIf="vistaActual === 'crear'" class="card shadow-sm">
+    <div class="card-header bg-success text-white">
+      <h5 class="mb-0">{{ puertaActual ? 'Editar Puerta' : 'Crear Nueva Puerta' }}</h5>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="puertaActual ? actualizarPuerta() : registrarPuerta()">
+        <div class="mb-3">
+          <label for="ubicacion" class="form-label">Ubicación</label>
+          <input type="text" id="ubicacion" [(ngModel)]="nuevaPuerta.ubicacion" name="ubicacion" class="form-control" required />
+        </div>
+        <div class="mb-3">
+          <label for="estado" class="form-label">Estado</label>
+          <select id="estado" [(ngModel)]="nuevaPuerta.estado" name="estado" class="form-select" required>
+            <option value="abierta">Abierta</option>
+            <option value="cerrada">Cerrada</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="accion" class="form-label">Acción</label>
+          <select id="accion" [(ngModel)]="accion" name="accion" class="form-select" required>
+            <option value="Apertura">Apertura</option>
+            <option value="Cierre">Cierre</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="hora" class="form-label">Hora</label>
+          <input type="text" id="hora" [(ngModel)]="hora" name="hora" class="form-control" required />
+        </div>
+        <button type="submit" class="btn btn-success">{{ puertaActual ? 'Actualizar Puerta' : 'Crear Puerta' }}</button>
+      </form>
+    </div>
+  </div>
 
-    <button (click)="editarPuerta()">Editar</button>
-    <button (click)="eliminarPuerta()">Eliminar</button>
-    <button (click)="vistaActual = 'listar'">Volver</button>
+  <!-- Vista: Detalles de puerta -->
+  <div *ngIf="vistaActual === 'detalles'" class="card shadow-sm">
+    <div class="card-header bg-info text-white">
+      <h5 class="mb-0">Detalles de Puerta: {{ puertaActual?.ubicacion }}</h5>
+    </div>
+    <div class="card-body">
+      <p><strong>Estado:</strong> {{ puertaActual?.estado }} <span class="estado-icono" [ngStyle]="{ color: obtenerColorIcono(puertaActual.estado) }">●</span></p>
+      <button class="btn btn-warning" (click)="editarPuerta()">Editar</button>
+      <button class="btn btn-danger" (click)="eliminarPuerta()">Eliminar</button>
+    </div>
   </div>
 </div>
