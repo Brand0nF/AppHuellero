@@ -53,7 +53,7 @@ export class AccesosComponent implements OnInit {
   }
 
   cargarUsuarios(): void {
-    // Recuperar los usuarios desde la API (deberías tener un servicio para obtener estos datos)
+    // Recuperar los usuarios desde la API
     this.usuarioService.listarUsuarios().subscribe((usuarios) => {
       this.usuarios = usuarios;
     });
