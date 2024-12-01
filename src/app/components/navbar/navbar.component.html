@@ -1,0 +1,36 @@
+<!-- navbar.component.html -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container-fluid">
+      <!-- Logo o nombre de la aplicación -->
+      <a class="navbar-brand" href="#">Secure Print</a>
+      
+      <!-- Botón de hamburguesa en pantallas pequeñas -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <!-- Menú de navegación -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <!-- Enlaces de navegación -->
+          <li class="nav-item">
+            <div class="nav-link" (click)="navigateTo('/home')">Home</div>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link" (click)="navigateTo('/accesos')">Accesos</div>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link" (click)="navigateTo('/usuarios')">Usuarios</div>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link" (click)="navigateTo('/ubicaciones')">Ubicaciones</div>
+          </li>
+          <!-- Botón de cerrar sesión -->
+          <li class="nav-item">
+            <button class="btn btn-danger" (click)="logout()">Cerrar sesión</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
