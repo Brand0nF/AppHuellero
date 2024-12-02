@@ -9,21 +9,24 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [RouterModule, NavbarComponent, CommonModule],
   template: `
-    <ng-container *ngIf="!isLoginPage">
-      <app-navbar></app-navbar> <!-- Navbar visible en todas las páginas excepto login -->
+    <!-- Navbar solo se muestra si el usuario está autenticado y no está en la página de login -->
+    <ng-container *ngIf="showNavbar">
+      <app-navbar></app-navbar>
     </ng-container>
     <router-outlet></router-outlet> <!-- Renderiza las vistas de las rutas -->
   `
 })
 export class AppComponent {
-  isLoginPage: boolean = false;
+  showNavbar: boolean = true; // Controla si el navbar debe mostrarse
 
   constructor(private router: Router) {
     // Detecta la ruta activa cuando cambia la navegación
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        // Verifica si la ruta actual es /login
-        this.isLoginPage = event.urlAfterRedirects === '/login';
+        // Si la ruta es /login, el navbar no se muestra
+        // También si no hay token en localStorage (es decir, el usuario no ha iniciado sesión)
+        const token = localStorage.getItem('token');
+        this.showNavbar = event.urlAfterRedirects !== '/login' && !!token;
       }
     });
   }

@@ -29,12 +29,12 @@ export class AuthService {
   // Método para cerrar sesión
   logout(): void {
     // Elimina el token de autenticación almacenado en el localStorage
-    localStorage.removeItem('authToken');
+    localStorage.removeItem('token');  // Cambiado para que coincida con el guard
     console.log('Sesión cerrada correctamente.');
   }
 
   // Método opcional para verificar si el usuario está autenticado
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('authToken'); // Comprueba si existe un token
+    return !!localStorage.getItem('token');  // Cambiado para que coincida con el guard
   }
 }

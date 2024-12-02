@@ -8,8 +8,8 @@ import { AccesosComponent } from './components/accesos/accesos.component';
 
 export const routes: Route[] = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },  // La ruta de login NO tiene AuthGuard
   { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'ubicaciones', component: UbicacionesComponent, canActivate: [AuthGuard] },
   { path: 'accesos', component: AccesosComponent, canActivate: [AuthGuard] }
