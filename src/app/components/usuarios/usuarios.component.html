@@ -5,6 +5,11 @@
     <button *ngIf="vistaActual === 'listar'" class="btn btn-success" (click)="vistaActual = 'crear'">Registrar Usuario</button>
   </div>
 
+  <!-- Mensaje de error -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
   <!-- Vista de lista de usuarios -->
   <div *ngIf="vistaActual === 'listar'">
     <div class="row">
