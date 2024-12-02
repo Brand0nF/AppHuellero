@@ -69,20 +69,18 @@ export class AccesosComponent implements OnInit {
         // Si la clave es correcta, permitir acceso
         this.nuevoAcceso.accesoPermitido = true; // Establecer acceso permitido en true
   
-        // Generar la hora actual en el formato requerido
+        // Generar la hora actual y formatearla
         const ahora = new Date();
-        const horaAcceso = ahora
-          .toLocaleString('es-CL', { timeZone: 'America/Santiago' })
-          .replace(',', '');
-  
-        // Verificar la fecha antes de enviarla
-        console.log('Fecha de acceso antes de enviar:', horaAcceso);
+        const horaAcceso = this.formatDate(ahora); // Formato de horaAcceso: DD-MM-YY, HH:MM:SS
   
         // Completar los datos del acceso
         const acceso = {
           ...this.nuevoAcceso,
-          horaAcceso: horaAcceso, // Asegurarse de que la hora esté actualizada
+          horaAcceso: horaAcceso, // Asegurarse de que la hora esté en formato correcto
         };
+  
+        // Verificar si la horaAcceso está correctamente agregada
+        console.log('Acceso que se va a enviar:', acceso);
   
         // Registrar el acceso
         this.accesoService.registrarAcceso(acceso).subscribe(
@@ -94,7 +92,12 @@ export class AccesosComponent implements OnInit {
           },
           (error) => {
             console.error('Error al registrar el acceso:', error);
-            console.error('Detalles del error:', error.error); // Muestra los detalles del error
+            if (error.error && error.error.errors) {
+              console.error('Detalles del error:', error.error.errors);
+              alert('Error al registrar el acceso: ' + JSON.stringify(error.error.errors));
+            } else {
+              alert('Error desconocido al registrar el acceso.');
+            }
           }
         );
       } else {
@@ -104,7 +107,17 @@ export class AccesosComponent implements OnInit {
       alert('Usuario no encontrado o clave no disponible.');
     }
   }
-  
+
+  // Función para formatear la fecha a "DD-MM-YY, HH:MM:SS"
+  formatDate(date: Date): string {
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear().toString().slice(-2); // Solo los últimos dos dígitos
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const seconds = date.getSeconds().toString().padStart(2, '0');
+    return `${day}-${month}-${year}, ${hours}:${minutes}:${seconds}`;
+  }
 
   limpiarFormulario(): void {
     this.nuevoAcceso = {

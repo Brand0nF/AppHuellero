@@ -1,4 +1,3 @@
-// acceso.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -12,14 +11,14 @@ export class AccesoService {
   constructor(private http: HttpClient) {}
 
   listarAccesos(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    return this.http.get<any[]>(this.apiUrl);  // Solicita la lista de accesos
   }
 
   registrarAcceso(acceso: any): Observable<any> {
-    return this.http.post(this.apiUrl, acceso);
+    return this.http.post<any>(this.apiUrl, acceso);  // Envía los datos del acceso
   }
 
   obtenerAccesos(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    return this.http.get<any[]>(this.apiUrl);  // Solicita la lista de accesos nuevamente (parece redundante con listarAccesos)
   }
 }
