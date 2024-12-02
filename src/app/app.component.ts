@@ -1,16 +1,30 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router'; // Asegúrate de importar RouterModule
+import { Router, NavigationEnd } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterModule, NavbarComponent],
+  imports: [RouterModule, NavbarComponent, CommonModule],
   template: `
-    <app-navbar></app-navbar>  <!-- Muestra el navbar en todas las páginas -->
-    <router-outlet></router-outlet> <!-- Aquí se cargarán las vistas del contenido -->
+    <ng-container *ngIf="!isLoginPage">
+      <app-navbar></app-navbar> <!-- Navbar visible en todas las páginas excepto login -->
+    </ng-container>
+    <router-outlet></router-outlet> <!-- Renderiza las vistas de las rutas -->
   `
 })
 export class AppComponent {
-  title = 'Mi aplicación';
+  isLoginPage: boolean = false;
+
+  constructor(private router: Router) {
+    // Detecta la ruta activa cuando cambia la navegación
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Verifica si la ruta actual es /login
+        this.isLoginPage = event.urlAfterRedirects === '/login';
+      }
+    });
+  }
 }

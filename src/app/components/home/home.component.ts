@@ -16,16 +16,6 @@ export class HomeComponent {
   navigateTo(path: string) {
     this.router.navigate([path]);
   }
-
-  // Redirige al usuario al menú principal
-  goToHome() {
-    this.router.navigate(['/home']);
-  }
-
-  // Redirige a la página seleccionada desde las tarjetas
-  goToPage(path: string) {
-    this.router.navigate([path]);
-  }
   // Método para cerrar sesión
   logout(): void {
     this.authService.logout(); // Llama al método logout en el servicio
